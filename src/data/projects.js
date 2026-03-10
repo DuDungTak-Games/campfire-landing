@@ -1,6 +1,14 @@
 export const projects = {
     web: [
         {
+            name: 'Constella',
+            description: '우주 탐사 지식 플랫폼 - AI 기반 지식 탐사와 소셜 협업',
+            image: '/images/constella-preview.png',
+            github: 'https://github.com/team-campfire-dev/Constella',
+            demo: 'https://constella.team-campfire.dev/ko/login',
+            status: 'In Development'
+        },
+        {
             name: 'Daisy',
             description: '개발중인 웹 서비스',
             image: '/images/daisy-preview.png',
