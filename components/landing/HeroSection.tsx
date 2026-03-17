@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useState } from 'react';
 
 interface Particle {
   left: number;
@@ -10,16 +10,18 @@ interface Particle {
   sway: number;
 }
 
+function generateParticles(): Particle[] {
+  return [...Array(50)].map(() => ({
+    left: 50 + (Math.random() - 0.5) * 20,
+    delay: Math.random() * -5,
+    duration: 2 + Math.random() * 3,
+    size: 3 + Math.random() * 6,
+    sway: (Math.random() - 0.5) * 60,
+  }));
+}
+
 export default function HeroSection() {
-  const particles: Particle[] = useMemo(() => {
-    return [...Array(50)].map(() => ({
-      left: 50 + (Math.random() - 0.5) * 20,
-      delay: Math.random() * -5,
-      duration: 2 + Math.random() * 3,
-      size: 3 + Math.random() * 6,
-      sway: (Math.random() - 0.5) * 60,
-    }));
-  }, []);
+  const [particles] = useState<Particle[]>(() => generateParticles());
 
   return (
     <section className="hero-section">
