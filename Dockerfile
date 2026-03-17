@@ -1,4 +1,4 @@
-# Stage 1: Build the React application
+# Stage 1: Build the Next.js application
 FROM node:20-alpine AS builder
 
 WORKDIR /app
@@ -15,17 +15,21 @@ COPY . .
 # Build the application
 RUN npm run build
 
-# Stage 2: Serve the application with Nginx
-FROM nginx:alpine
+# Stage 2: Run the application with Node.js (standalone output)
+FROM node:20-alpine AS runner
 
-# Copy the build output from the previous stage
-COPY --from=builder /app/build /usr/share/nginx/html
+WORKDIR /app
 
-# Copy custom Nginx configuration
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+ENV NODE_ENV=production
 
-# Expose port 80
-EXPOSE 80
+# Copy the standalone build output
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]
