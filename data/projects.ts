@@ -30,6 +30,13 @@ export const projects: Record<ProjectCategory, Project[]> = {
       demo: 'https://daisy.team-campfire.dev/',
       status: 'In Development',
     },
+    {
+      name: '서랍',
+      description: '할 일과 루틴, 독서, 친구와 함께하는 소셜 투두 서비스',
+      image: '/images/seorab-preview.png',
+      demo: 'https://seorab.team-campfire.dev/',
+      status: 'In Development',
+    },
   ],
   game: [
     {
